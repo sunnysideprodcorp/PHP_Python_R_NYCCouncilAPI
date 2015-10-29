@@ -5,7 +5,6 @@ require_once("email.php");
 require_once("upload_mail_functions.php");
 
 
-
 // Setting up constants and useful variables from $_POST info
 
 // MongoDB record constants
@@ -33,7 +32,6 @@ $license = htmlspecialchars($_POST['license']);
 $time = time();
 
 
-
 // move uploaded file to appropriate location, file name is made unique before upload
 $target_file = $TARGET_DIR . $_FILES["upload"]["name"];
 $success = move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file);
@@ -46,14 +44,11 @@ $filename = $target_file;
 $short_file = $_FILES["upload"]["name"];
 
 
-
 // connect to Mongo and insert basic data
 $m = new MongoClient();
 $db = $m->selectDB("idling");
 $collection = $db->videos;
 $collection->insert(array("email" => $email, "address" => $address, "latitude" => $latitude, "longitude" => $longitude, "license" => $license, "time" => $time, "file" => $filename));
-
-
 
 
 // Now on to getting details so we can contact the relevant NYC councilperson
